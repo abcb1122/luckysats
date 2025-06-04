@@ -32,3 +32,36 @@ const intervalo = setInterval(() => {
     countdownEl.innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
 
 }, 1000);
+
+// --- PASO 2: CÓDIGO DEL PRECIO DE BTC ---
+
+// Buscamos el elemento HTML con el id="btc-price"
+const btcPriceEl = document.getElementById('btc-price');
+
+// Creamos una función para obtener el precio.
+async function fetchBtcPrice() {
+    try {
+        // Hacemos la llamada a la API de CoinGecko y esperamos la respuesta
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+        
+        // Convertimos la respuesta en un formato que JavaScript pueda usar (JSON)
+        const data = await response.json();
+        
+        // Obtenemos el precio en USD y le damos un formato bonito (con comas)
+        const formattedPrice = data.bitcoin.usd.toLocaleString('en-US');
+
+        // Actualizamos el contenido del elemento HTML con el precio
+        btcPriceEl.innerHTML = `$${formattedPrice}`;
+
+    } catch (error) {
+        // Si algo falla, mostramos un error en la consola
+        console.error("Error al obtener el precio de BTC:", error);
+        btcPriceEl.innerHTML = 'Error';
+    }
+}
+
+// Llamamos a la función una vez para que se ejecute en cuanto cargue la página
+fetchBtcPrice();
+
+// Además, configuramos un intervalo para que la función se vuelva a ejecutar cada 60 segundos
+setInterval(fetchBtcPrice, 60000);
