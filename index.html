@@ -1,1 +1,92 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuckySats - Predice el Precio de Bitcoin y Gana</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Montserrat & Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Nuestro CSS personalizado (si lo necesitamos más adelante) -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+      // Configuración de Tailwind para usar las fuentes que elegimos
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Roboto', 'sans-serif'], // Fuente por defecto para el cuerpo
+              montserrat: ['Montserrat', 'sans-serif'], // Fuente para títulos
+            },
+            colors: {
+              // Replicamos nuestra paleta aquí para fácil acceso con Tailwind
+              'bitcoin-orange': '#F7931A',
+              'dark-gray': '#1A1A1A',
+              'light-gray-text': '#EAEAEA',
+              'lightning-blue': '#00D4FF',
+              'winner-gold': '#FFD700',
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-dark-gray text-light-gray-text font-sans">
+
+    <header class="bg-bitcoin-orange text-white p-4">
+        <nav class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-montserrat font-bold">LuckySats</h1>
+            <div>
+                <a href="#hero" class="px-3 hover:text-dark-gray">Inicio</a>
+                <a href="#rules" class="px-3 hover:text-dark-gray">Reglas</a>
+                <a href="#faq" class="px-3 hover:text-dark-gray">FAQ</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Aquí irá el contenido principal de nuestra página, sección por sección -->
+        <section id="hero" class="container mx-auto text-center py-12 md:py-20">
+            <h2 class="text-4xl md:text-5xl font-montserrat font-bold mb-4">¡PREDICE EL PRECIO DE BITCOIN Y GANA!</h2>
+            
+            <div class="my-8">
+                <p class="text-lg">Precio BTC en Vivo:</p>
+                <p id="btc-price" class="text-3xl font-bold text-bitcoin-orange">Cargando...</p>
+            </div>
+
+            <div class="my-8">
+                <p class="text-lg">EL BOTE ACTUAL:</p>
+                <p id="pot-value" class="text-4xl font-bold text-winner-gold">Cargando...</p>
+            </div>
+
+            <div class="my-8">
+                <p class="text-lg">TIEMPO RESTANTE PARA PARTICIPAR:</p>
+                <p id="countdown" class="text-3xl font-bold text-lightning-blue">Cargando...</p>
+            </div>
+
+            <a href="#participate" class="bg-bitcoin-orange hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg text-xl inline-block mt-6">
+                ¡PARTICIPA AHORA!
+            </a>
+        </section>
+
+        <!-- Más secciones vendrán aquí, como "Cómo Funciona", "Participación", etc. -->
+
+    </main>
+
+    <footer class="bg-gray-800 text-center p-6 mt-12">
+        <p>&copy; 2025 LuckySats. Todos los derechos reservados.</p>
+        <!-- Aquí podríamos añadir enlaces a redes sociales o un descargo de responsabilidad -->
+    </footer>
+
+    <!-- Nuestro JavaScript personalizado -->
+    <script src="js/main.js"></script>
+</body>
+</html>
