@@ -1,7 +1,9 @@
 // --- PASO 1: CÓDIGO DEL CONTADOR REGRESIVO ---
 const countdownEl = document.getElementById('countdown');
 const hoy = new Date();
-const finDeMes = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0, 23, 59, 59);
+// Creación de la fecha de fin de mes de forma robusta usando UTC
+const finDeMes = new Date(Date.UTC(hoy.getUTCFullYear(), hoy.getUTCMonth() + 1, 0, 23, 59, 59));
+
 const intervalo = setInterval(() => {
     const ahora = new Date().getTime();
     const distancia = finDeMes.getTime() - ahora;
@@ -33,22 +35,27 @@ async function fetchBtcPrice() {
 fetchBtcPrice();
 setInterval(fetchBtcPrice, 60000);
 
-// --- PASO 3: CÓDIGO DEL BOTE Y DATOS DE CONFIGURACIÓN ---
+// --- PASO 3: CÓDIGO DEL POTE Y DATOS HISTÓRICOS ---
 const potValueEl = document.getElementById('pot-value');
-const prizePotEl = document.getElementById('prize-pot'); // Nuevo elemento para el premio
 const lastMonthPriceEl = document.getElementById('last-month-price');
 const priceSourceLinkEl = document.getElementById('price-source-link');
-async function fetchConfigData() {
+
+// Lógica para el Pote en tiempo real
+async function fetchPotData() {
     try {
         const workerUrl = 'https://solitary-wildflower-a068.arielbcb.workers.dev/';
         const potResponse = await fetch(workerUrl);
         const potData = await potResponse.json();
-        
-        // Mostramos el Bote Total
-        potValueEl.innerHTML = `${potData.totalBalance.toLocaleString('en-US')} Satoshis`;
-        // Mostramos el Premio para el Ganador
-        prizePotEl.innerHTML = `Premio: ${potData.prizePot.toLocaleString('en-US')} sats`;
+        potValueEl.innerHTML = `${potData.balance.toLocaleString('en-US')} Satoshis`;
+    } catch (error) {
+        console.error("Error al obtener datos del pote:", error);
+        potValueEl.innerHTML = 'Error';
+    }
+}
 
+// Lógica para los datos estáticos (mes anterior)
+function setStaticData() {
+    try {
         const lastMonthData = {
             name: "Mayo 2025",
             closingPrice: "$102,500",
@@ -58,16 +65,17 @@ async function fetchConfigData() {
         lastMonthPriceEl.innerHTML = lastMonthData.closingPrice;
         priceSourceLinkEl.href = lastMonthData.sourceURL;
         priceSourceLinkEl.innerHTML = `Fuente: ${lastMonthData.sourceName}`;
-    } catch (error) {
-        console.error("Error al obtener datos:", error);
-        potValueEl.innerHTML = 'Error';
+    } catch(error) {
+        console.error("Error al establecer datos estáticos:", error);
         lastMonthPriceEl.innerHTML = 'Error';
     }
 }
-fetchConfigData();
-setInterval(fetchConfigData, 120000);
 
-// --- PASO 4: CÓDIGO PARA MOSTRAR ZONAS HORARIAS ---
+fetchPotData();
+setInterval(fetchPotData, 120000); // Actualiza el pote cada 2 minutos
+setStaticData(); // Llama a esta función una vez
+
+// --- PASO 4: CÓDIGO PARA MOSTRAR ZONAS HORARIAS (Corregido) ---
 function displayClosingTimes() {
     const timezonesEl = document.getElementById('timezones');
     if (!timezonesEl) return;
@@ -79,11 +87,11 @@ function displayClosingTimes() {
         { name: 'Dubái', timeZone: 'Asia/Dubai', offset: 'UTC+4' },
         { name: 'Tokio', timeZone: 'Asia/Tokyo', offset: 'UTC+9' }
     ];
-    const options = { hour: '2-digit', minute: '2-digit', hour12: true };
+    const options = { hour: 'numeric', minute: 'numeric', hour12: false };
     let html = '';
     cities.forEach(city => {
-        const localTime = finDeMes.toLocaleTimeString('es-ES', { ...options, timeZone: city.timeZone });
-        html += `<span class="whitespace-nowrap">${city.name} (${city.offset}): ${localTime}</span>`;
+        const localTime = finDeMes.toLocaleTimeString('es-CO', { ...options, timeZone: city.timeZone });
+        html += `<span class="whitespace-nowrap">${city.name} (${city.offset}): ${localTime}h</span>`;
     });
     timezonesEl.innerHTML = html;
 }
