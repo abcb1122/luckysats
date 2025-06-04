@@ -65,3 +65,28 @@ fetchBtcPrice();
 
 // Además, configuramos un intervalo para que la función se vuelva a ejecutar cada 60 segundos
 setInterval(fetchBtcPrice, 60000);
+
+// --- PASO 3: CÓDIGO DEL BOTE ACTUAL (VERSIÓN API) ---
+
+const potValueEl = document.getElementById('pot-value');
+
+async function fetchPotBalance() {
+    try {
+        // !! CAMBIA ESTA URL POR LA URL DE TU NUEVO WORKER !!
+        const workerUrl = 'https://luckysats-pot-worker.tu-usuario.workers.dev';
+        
+        const response = await fetch(workerUrl);
+        const data = await response.json();
+
+        const formattedPot = data.balance.toLocaleString('en-US');
+        potValueEl.innerHTML = `${formattedPot} Satoshis`;
+
+    } catch (error) {
+        console.error("Error al obtener el saldo del bote:", error);
+        potValueEl.innerHTML = 'Error';
+    }
+}
+
+// Llamamos a la función al cargar la página y luego cada 2 minutos
+fetchPotBalance();
+setInterval(fetchPotBalance, 120000); // Actualiza cada 2 minutos
