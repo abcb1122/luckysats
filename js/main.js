@@ -73,7 +73,7 @@ const potValueEl = document.getElementById('pot-value');
 async function fetchPotBalance() {
     try {
         // !! CAMBIA ESTA URL POR LA URL DE TU NUEVO WORKER !!
-        const workerUrl = 'https://luckysats-pot-worker.tu-usuario.workers.dev';
+        const workerUrl = 'https://solitary-wildflower-a068.arielbcb.workers.dev/';
         
         const response = await fetch(workerUrl);
         const data = await response.json();
