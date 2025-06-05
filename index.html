@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuckySats - Predice el Precio de Bitcoin y Gana</title>
+    <title>LuckySats - 🍀</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,22 +35,22 @@
         <section id="hero" class="container mx-auto text-center pt-16 pb-20 md:pt-24 md:pb-28 px-4">
             <div class="mb-10">
                 <h1 class="text-4xl md:text-5xl font-montserrat font-bold">LUCKY SATS</h1>
-                <p class="text-lg text-gray-400 mt-2">Predice el Precio de Cierre de Bitcoin y Gana el Pote</p>
+                <p class="text-lg text-gray-400 mt-2">🍀</p>
             </div>
             
             <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 my-10">
                 <div class="bg-gray-800 p-6 rounded-lg text-center">
-                    <p class="text-lg text-gray-400">Precio BTC en Vivo</p>
+                    <p class="text-lg text-gray-400">Precio BTC en vivo</p>
                     <p id="btc-price" class="text-3xl font-bold text-bitcoin-orange mt-2">Cargando...</p>
                     <a href="https://www.coingecko.com/es/monedas/bitcoin" target="_blank" rel="noopener noreferrer" class="text-xs text-gray-500 mt-2 hover:underline">Fuente: CoinGecko</a>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg text-center">
-                    <p class="text-lg text-gray-400">Pote Total del Sorteo</p>
+                    <p class="text-lg text-gray-400">Premio acumulado del sorteo</p>
                     <p id="pot-value" class="text-3xl font-bold text-winner-gold mt-2">Cargando...</p>
-                    <p class="text-xs text-gray-500 mt-2">El premio es el pote total menos una comisión del 2.1%</p>
+                    <p class="text-xs text-gray-500 mt-2">El ganador recibirá el premio menos una comisión del 2.1%</p>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg text-center">
-                    <p class="text-lg text-gray-400">Cierre Mes Anterior</p>
+                    <p class="text-lg text-gray-400">Cierre mes anterior</p>
                     <p id="last-month-price" class="text-3xl font-bold text-gray-300 mt-2">Cargando...</p>
                     <a id="price-source-link" href="#" target="_blank" rel="noopener noreferrer" class="text-xs text-lightning-blue hover:underline mt-2 inline-block">Ver Fuente Oficial</a>
                 </div>
@@ -72,14 +72,14 @@
 
         <section id="how-it-works" class="bg-gray-800 py-16 md:py-20">
             <div class="container mx-auto text-center px-6">
-                <h2 class="text-3xl font-montserrat font-bold mb-12">Participa en 3 Simples Pasos</h2>
+                <h2 class="text-3xl font-montserrat font-bold mb-12">Participa en 3 simples pasos</h2>
                 <div class="flex flex-col md:flex-row justify-center items-start gap-12 md:gap-16">
                     
                     <div class="flex flex-col items-center text-center w-full md:w-1/3">
                         <div class="bg-dark-gray p-5 rounded-full border-2 border-lightning-blue mb-4 inline-block">
                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-lightning-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                         </div>
-                        <h3 class="text-xl font-montserrat font-bold mb-2">1. Paga la Entrada</h3>
+                        <h3 class="text-xl font-montserrat font-bold mb-2">1. Compra tu boleta por 10.000 SATS</h3>
                         <p class="max-w-xs text-gray-400 mx-auto">Envía los sats a la LN Address oficial del sorteo.</p>
                     </div>
 
@@ -87,15 +87,15 @@
                          <div class="bg-dark-gray p-5 rounded-full border-2 border-bitcoin-orange mb-4 inline-block">
                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-bitcoin-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 14h.01M12 11h.01M12 8h.01M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                         </div>
-                        <h3 class="text-xl font-montserrat font-bold mb-2">2. Envía tu Predicción</h3>
-                        <p class="max-w-xs text-gray-400 mx-auto">En el mensaje del pago, incluye tu precio y tu LN Address.</p>
+                        <h3 class="text-xl font-montserrat font-bold mb-2">2. Envía tu predicción</h3>
+                        <p class="max-w-xs text-gray-400 mx-auto">En el mensaje de la factura Lightning, incluye tu predicción y tu LN Address.</p>
                     </div>
 
                     <div class="flex flex-col items-center text-center w-full md:w-1/3">
                         <div class="bg-dark-gray p-5 rounded-full border-2 border-winner-gold mb-4 inline-block">
                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-winner-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1m0-1V4m0 2.01M12 14c1.657 0 3-.895 3-2s-1.343-2-3-2-3-.895-3-2 1.343-2 3-2m0 8c-1.11 0-2.08-.402-2.599-1M12 14v1m0-1v-.01M12 16v1m0 1V18m0-2.01M6 6l-1 1l1-1zM6 18l-1-1l1 1zM18 6l1 1l-1-1zM18 18l1-1l-1 1z" /></svg>
                         </div>
-                        <h3 class="text-xl font-montserrat font-bold mb-2">3. Gana el Pote</h3>
+                        <h3 class="text-xl font-montserrat font-bold mb-2">3. Gana el pote</h3>
                         <p class="max-w-xs text-gray-400 mx-auto">Si tu predicción es la más cercana, ¡el pote es tuyo!</p>
                     </div>
                 </div>
