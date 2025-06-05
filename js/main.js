@@ -1,4 +1,5 @@
 // --- PASO 1: CÓDIGO DEL CONTADOR REGRESIVO ---
+// (Este código no cambia, déjalo como está)
 const countdownEl = document.getElementById('countdown');
 const hoy = new Date();
 const finDeMes = new Date(Date.UTC(hoy.getUTCFullYear(), hoy.getUTCMonth() + 1, 0, 23, 59, 59));
@@ -18,6 +19,7 @@ const intervalo = setInterval(() => {
 }, 1000);
 
 // --- PASO 2: CÓDIGO DEL PRECIO DE BTC ---
+// (Este código no cambia, déjalo como está)
 const btcPriceEl = document.getElementById('btc-price');
 async function fetchBtcPrice() {
     try {
@@ -43,7 +45,7 @@ async function fetchPotData() {
         const workerUrl = 'https://solitary-wildflower-a068.arielbcb.workers.dev/';
         const potResponse = await fetch(workerUrl);
         const potData = await potResponse.json();
-        potValueEl.innerHTML = `${potData.balance.toLocaleString('en-US')} SATS`;
+        potValueEl.innerHTML = `${potData.balance.toLocaleString('en-US')} Satoshis`;
     } catch (error) {
         console.error("Error al obtener datos del pote:", error);
         potValueEl.innerHTML = 'Error';
@@ -69,18 +71,22 @@ async function fetchPreviousMonthClose() {
         if (data && data.market_data && data.market_data.current_price && data.market_data.current_price.usd) {
             const closingPrice = data.market_data.current_price.usd;
             lastMonthPriceEl.innerHTML = closingPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
-            priceSourceLinkEl.href = `https://www.coingecko.com/es/monedas/bitcoin/historical_data/${year}-${month}-${day}#panel`;
+            // --- CAMBIO AQUÍ ---
+            priceSourceLinkEl.href = 'https://www.coingecko.com/es/monedas/bitcoin/historical_data'; 
             priceSourceLinkEl.innerHTML = `Fuente: CoinGecko (${day}/${month}/${year})`;
         } else {
             lastMonthPriceEl.innerHTML = 'Dato no disponible';
             priceSourceLinkEl.innerHTML = 'Fuente: CoinGecko';
+            // --- CAMBIO AQUÍ ---
             priceSourceLinkEl.href = 'https://www.coingecko.com/es/monedas/bitcoin/historical_data';
         }
+
     } catch (error) {
         console.error("Error al obtener el precio histórico:", error);
         lastMonthPriceEl.innerHTML = 'Error';
         priceSourceLinkEl.innerHTML = 'Fuente: CoinGecko';
-        priceSourceLinkEl.href = 'https://www.coingecko.com/es/monedas/bitcoin';
+        // --- CAMBIO AQUÍ ---
+        priceSourceLinkEl.href = 'https://www.coingecko.com/es/monedas/bitcoin/historical_data';
     }
 }
 
@@ -89,6 +95,7 @@ setInterval(fetchPotData, 120000);
 fetchPreviousMonthClose();
 
 // --- PASO 4: CÓDIGO PARA MOSTRAR ZONAS HORARIAS ---
+// (Este código no cambia, déjalo como está)
 function displayClosingTimes() {
     const timezonesEl = document.getElementById('timezones');
     if (!timezonesEl) return;
@@ -110,8 +117,8 @@ function displayClosingTimes() {
 }
 
 // --- PASO 5: CÓDIGO PARA LA SECCIÓN DE PARTICIPACIÓN ---
+// (Este código no cambia, déjalo como está)
 const lnAddressForPayment = "luck@pay.abcbbtc.com";
-
 function generatePaymentQRCode() {
     const qrCodeEl = document.getElementById("payment-qrcode");
     if (qrCodeEl) {
@@ -128,15 +135,14 @@ function generatePaymentQRCode() {
         console.error("Elemento para el QR no encontrado: payment-qrcode");
     }
 }
-
 function copyPaymentLNAddress() {
-    const lnAddressInput = document.getElementById("ln-address-payment"); // Asegúrate que este ID exista en tu HTML
-    if (lnAddressInput && lnAddressInput.value) { // Verifica que el input exista y tenga valor
-        navigator.clipboard.writeText(lnAddressInput.value).then(() => { // Copia el valor del input
+    const lnAddressInput = document.getElementById("ln-address-payment");
+    if (lnAddressInput && lnAddressInput.value) {
+        navigator.clipboard.writeText(lnAddressInput.value).then(() => {
             alert("¡LN Address copiada al portapapeles!");
         }).catch(err => {
             console.error('Error al copiar la LN Address con navigator.clipboard: ', err);
-            try { // Fallback
+            try {
                 lnAddressInput.select();
                 document.execCommand('copy');
                 alert("¡LN Address copiada! (Fallback)");
@@ -150,9 +156,7 @@ function copyPaymentLNAddress() {
     }
 }
 
-// Llamamos a las funciones cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     displayClosingTimes();
     generatePaymentQRCode();
-    // Si tienes otras funciones que deban ejecutarse al inicio, llámalas aquí
 });
