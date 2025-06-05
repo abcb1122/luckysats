@@ -45,7 +45,7 @@ async function fetchPotData() {
         const workerUrl = 'https://solitary-wildflower-a068.arielbcb.workers.dev/';
         const potResponse = await fetch(workerUrl);
         const potData = await potResponse.json();
-        potValueEl.innerHTML = `${potData.balance.toLocaleString('en-US')} Satoshis`;
+        potValueEl.innerHTML = `${potData.balance.toLocaleString('en-US')} SATS`;
     } catch (error) {
         console.error("Error al obtener datos del pote:", error);
         potValueEl.innerHTML = 'Error';
