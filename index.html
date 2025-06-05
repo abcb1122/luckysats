@@ -74,9 +74,29 @@
             <div class="container mx-auto text-center px-6">
                 <h2 class="text-3xl font-montserrat font-bold mb-12">Participa en 3 Simples Pasos</h2>
                 <div class="flex flex-col md:flex-row justify-center items-start gap-12 md:gap-16">
-                    <div class="flex flex-col items-center text-center"><div class="bg-dark-gray p-5 rounded-full border-2 border-lightning-blue mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-lightning-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div><h3 class="text-xl font-montserrat font-bold mb-2">1. Paga la Entrada</h3><p class="max-w-xs text-gray-400">Envía los sats a la LN Address oficial del sorteo.</p></div>
-                    <div class="flex flex-col items-center text-center"><div class="bg-dark-gray p-5 rounded-full border-2 border-bitcoin-orange mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-bitcoin-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 14h.01M12 11h.01M12 8h.01M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg></div><h3 class="text-xl font-montserrat font-bold mb-2">2. Envía tu Predicción</h3><p class="max-w-xs text-gray-400">En el mensaje del pago, incluye tu precio y tu LN Address.</p></div>
-                    <div class="flex flex-col items-center text-center"><div class="bg-dark-gray p-5 rounded-full border-2 border-winner-gold mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-winner-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1m0-1V4m0 2.01M12 14c1.657 0 3-.895 3-2s-1.343-2-3-2-3-.895-3-2 1.343-2 3-2m0 8c-1.11 0-2.08-.402-2.599-1M12 14v1m0-1v-.01M12 16v1m0 1V18m0-2.01M6 6l-1 1l1-1zM6 18l-1-1l1 1zM18 6l1 1l-1-1zM18 18l1-1l-1 1z" /></svg></div><h3 class="text-xl font-montserrat font-bold mb-2">3. Gana el Pote</h3><p class="max-w-xs text-gray-400">Si tu predicción es la más cercana, ¡el pote es tuyo!</p></div>
+                    <div class="flex flex-col items-center"> {/* Contenedor del paso ya tiene items-center */}
+                        <div class="bg-dark-gray p-5 rounded-full border-2 border-lightning-blue mb-4">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-lightning-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-montserrat font-bold mb-2 text-center">1. Paga la Entrada</h3>
+                        <p class="max-w-xs text-gray-400 text-center">Envía los sats a la LN Address oficial del sorteo.</p> {/* Añadido text-center aquí también */}
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                         <div class="bg-dark-gray p-5 rounded-full border-2 border-bitcoin-orange mb-4">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-bitcoin-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 14h.01M12 11h.01M12 8h.01M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-montserrat font-bold mb-2 text-center">2. Envía tu Predicción</h3>
+                        <p class="max-w-xs text-gray-400 text-center">En el mensaje del pago, incluye tu precio y tu LN Address.</p> {/* Añadido text-center */}
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <div class="bg-dark-gray p-5 rounded-full border-2 border-winner-gold mb-4">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-winner-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1m0-1V4m0 2.01M12 14c1.657 0 3-.895 3-2s-1.343-2-3-2-3-.895-3-2 1.343-2 3-2m0 8c-1.11 0-2.08-.402-2.599-1M12 14v1m0-1v-.01M12 16v1m0 1V18m0-2.01M6 6l-1 1l1-1zM6 18l-1-1l1 1zM18 6l1 1l-1-1zM18 18l1-1l-1 1z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-montserrat font-bold mb-2 text-center">3. Gana el Pote</h3>
+                        <p class="max-w-xs text-gray-400 text-center">Si tu predicción es la más cercana, ¡el pote es tuyo!</p> {/* Añadido text-center */}
+                    </div>
                 </div>
             </div>
         </section>
