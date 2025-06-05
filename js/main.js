@@ -33,37 +33,30 @@ async function fetchBtcPrice() {
 fetchBtcPrice();
 setInterval(fetchBtcPrice, 60000);
 
-// --- PASO 3: CÓDIGO DEL POTE ---
+// --- PASO 3: CÓDIGO DEL POTE Y DATOS HISTÓRICOS ---
 const potValueEl = document.getElementById('pot-value');
+const lastMonthPriceEl = document.getElementById('last-month-price');
+const priceSourceLinkEl = document.getElementById('price-source-link');
+
 async function fetchPotData() {
     try {
         const workerUrl = 'https://solitary-wildflower-a068.arielbcb.workers.dev/';
         const potResponse = await fetch(workerUrl);
         const potData = await potResponse.json();
-        potValueEl.innerHTML = `${potData.balance.toLocaleString('en-US')} SATS`;
+        potValueEl.innerHTML = `${potData.balance.toLocaleString('en-US')} Satoshis`;
     } catch (error) {
         console.error("Error al obtener datos del pote:", error);
         potValueEl.innerHTML = 'Error';
     }
 }
-fetchPotData();
-setInterval(fetchPotData, 120000);
-
-// --- NUEVA FUNCIÓN PARA EL PRECIO HISTÓRICO ---
-const lastMonthPriceEl = document.getElementById('last-month-price');
-const priceSourceLinkEl = document.getElementById('price-source-link');
 
 async function fetchPreviousMonthClose() {
     try {
         const today = new Date();
-        // Obtenemos el primer día del mes actual
         const firstDayCurrentMonth = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), 1));
-        // Restamos un día para obtener el último día del mes anterior
         const lastDayPreviousMonth = new Date(firstDayCurrentMonth.getTime() - (24 * 60 * 60 * 1000));
-
-        // Formateamos la fecha a dd-mm-yyyy para la API de CoinGecko
         const day = String(lastDayPreviousMonth.getUTCDate()).padStart(2, '0');
-        const month = String(lastDayPreviousMonth.getUTCMonth() + 1).padStart(2, '0'); // Meses son 0-indexados
+        const month = String(lastDayPreviousMonth.getUTCMonth() + 1).padStart(2, '0');
         const year = lastDayPreviousMonth.getUTCFullYear();
         const dateForAPI = `${day}-${month}-${year}`;
 
@@ -76,13 +69,13 @@ async function fetchPreviousMonthClose() {
         if (data && data.market_data && data.market_data.current_price && data.market_data.current_price.usd) {
             const closingPrice = data.market_data.current_price.usd;
             lastMonthPriceEl.innerHTML = closingPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
-            priceSourceLinkEl.href = `https://www.coingecko.com/es/monedas/bitcoin/historical_data/${year}-${month}-${day}#panel`; // Enlace aproximado
+            priceSourceLinkEl.href = `https://www.coingecko.com/es/monedas/bitcoin/historical_data/${year}-${month}-${day}#panel`;
             priceSourceLinkEl.innerHTML = `Fuente: CoinGecko (${day}/${month}/${year})`;
         } else {
             lastMonthPriceEl.innerHTML = 'Dato no disponible';
             priceSourceLinkEl.innerHTML = 'Fuente: CoinGecko';
+            priceSourceLinkEl.href = 'https://www.coingecko.com/es/monedas/bitcoin/historical_data';
         }
-
     } catch (error) {
         console.error("Error al obtener el precio histórico:", error);
         lastMonthPriceEl.innerHTML = 'Error';
@@ -90,9 +83,12 @@ async function fetchPreviousMonthClose() {
         priceSourceLinkEl.href = 'https://www.coingecko.com/es/monedas/bitcoin';
     }
 }
-fetchPreviousMonthClose(); // Llamamos la nueva función
 
-// --- PASO 4: CÓDIGO PARA MOSTRAR ZONAS HORARIAS (Corregido) ---
+fetchPotData();
+setInterval(fetchPotData, 120000);
+fetchPreviousMonthClose();
+
+// --- PASO 4: CÓDIGO PARA MOSTRAR ZONAS HORARIAS ---
 function displayClosingTimes() {
     const timezonesEl = document.getElementById('timezones');
     if (!timezonesEl) return;
@@ -100,7 +96,7 @@ function displayClosingTimes() {
         { name: 'Bogotá', timeZone: 'America/Bogota', offset: 'UTC-5' },
         { name: 'São Paulo', timeZone: 'America/Sao_Paulo', offset: 'UTC-3' },
         { name: 'Buenos Aires', timeZone: 'America/Argentina/Buenos_Aires', offset: 'UTC-3' },
-        { name: 'Madrid', timeZone: 'Europe/Madrid', offset: 'UTC+2' }, // Puede variar con DST
+        { name: 'Madrid', timeZone: 'Europe/Madrid', offset: 'UTC+2' },
         { name: 'Dubái', timeZone: 'Asia/Dubai', offset: 'UTC+4' },
         { name: 'Tokio', timeZone: 'Asia/Tokyo', offset: 'UTC+9' }
     ];
@@ -112,4 +108,51 @@ function displayClosingTimes() {
     });
     timezonesEl.innerHTML = html;
 }
-document.addEventListener('DOMContentLoaded', displayClosingTimes);
+
+// --- PASO 5: CÓDIGO PARA LA SECCIÓN DE PARTICIPACIÓN ---
+const lnAddressForPayment = "luck@pay.abcbbtc.com";
+
+function generatePaymentQRCode() {
+    const qrCodeEl = document.getElementById("payment-qrcode");
+    if (qrCodeEl) {
+        qrCodeEl.innerHTML = ""; 
+        new QRCode(qrCodeEl, {
+            text: `lightning:${lnAddressForPayment}`,
+            width: 160,
+            height: 160,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    } else {
+        console.error("Elemento para el QR no encontrado: payment-qrcode");
+    }
+}
+
+function copyPaymentLNAddress() {
+    const lnAddressInput = document.getElementById("ln-address-payment"); // Asegúrate que este ID exista en tu HTML
+    if (lnAddressInput && lnAddressInput.value) { // Verifica que el input exista y tenga valor
+        navigator.clipboard.writeText(lnAddressInput.value).then(() => { // Copia el valor del input
+            alert("¡LN Address copiada al portapapeles!");
+        }).catch(err => {
+            console.error('Error al copiar la LN Address con navigator.clipboard: ', err);
+            try { // Fallback
+                lnAddressInput.select();
+                document.execCommand('copy');
+                alert("¡LN Address copiada! (Fallback)");
+            } catch (e) {
+                console.error('Error al copiar la LN Address con document.execCommand: ', e);
+                alert("Error al copiar. Por favor, cópiala manualmente.");
+            }
+        });
+    } else {
+        console.error("Input para LN Address no encontrado o vacío.");
+    }
+}
+
+// Llamamos a las funciones cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    displayClosingTimes();
+    generatePaymentQRCode();
+    // Si tienes otras funciones que deban ejecutarse al inicio, llámalas aquí
+});
