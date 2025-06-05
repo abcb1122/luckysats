@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <script>
       tailwind.config = {
@@ -97,6 +98,45 @@
                         </div>
                         <h3 class="text-xl font-montserrat font-bold mb-2">3. Gana el pote</h3>
                         <p class="max-w-xs text-gray-400 mx-auto">Si tu predicción es la más cercana, ¡el pote es tuyo!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="participate" class="container mx-auto text-center py-16 md:py-20 px-4">
+            <h2 class="text-3xl font-montserrat font-bold mb-4">¡Haz Tu Jugada Maestra!</h2>
+            <p class="text-lg text-gray-400 mb-10">Sigue estos pasos para enviar tu predicción y participar por el pote.</p>
+
+            <div class="max-w-2xl mx-auto bg-gray-800 p-6 md:p-8 rounded-lg shadow-xl">
+                
+                <div class="md:flex md:items-center md:gap-8">
+                    <div class="mb-6 md:mb-0 flex-shrink-0">
+                        <p class="font-semibold mb-2 text-lg">1. Paga 10.000 sats:</p>
+                        <div id="payment-qrcode" class="bg-white p-3 rounded-md inline-block mx-auto mt-2">
+                            </div>
+                    </div>
+
+                    <div class="text-left flex-grow">
+                        <p class="font-semibold mb-2 text-lg">O copia la LN Address:</p>
+                        <div class="flex items-center mb-4">
+                            <input type="text" id="ln-address-payment" value="luck@pay.abcbbtc.com" readonly 
+                                   class="bg-dark-gray border border-gray-700 text-light-gray-text text-sm rounded-l-md p-3 w-full focus:ring-bitcoin-orange focus:border-bitcoin-orange">
+                            <button onclick="copyPaymentLNAddress()" 
+                                    class="bg-bitcoin-orange hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-r-md">
+                                Copiar
+                            </button>
+                        </div>
+                        
+                        <p class="font-semibold mb-2 mt-6 text-lg">2. Incluye en el Mensaje del Pago:</p>
+                        <div class="bg-dark-gray p-4 rounded-md text-sm">
+                            <p class="font-mono text-lightning-blue break-all">PRECIO_PREDICHO TU_LN_PAYOUT NICK_OPCIONAL</p>
+                            <p class="text-xs text-gray-500 mt-2">Ejemplo: <span class="font-mono">105000.50 miwallet@ln.com MiNick</span></p>
+                        </div>
+                        <ul class="text-xs text-gray-500 mt-3 list-disc list-inside pl-2">
+                            <li><strong>PRECIO_PREDICHO:</strong> Tu predicción para BTC/USD (ej: 110250.75).</li>
+                            <li><strong>TU_LN_PAYOUT:</strong> Tu LN Address donde recibir el premio.</li>
+                            <li><strong>NICK_OPCIONAL:</strong> Un apodo si resultas ganador.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
