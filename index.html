@@ -22,7 +22,7 @@
               'bitcoin-orange': '#F7931A',
               'dark-gray': '#1A1A1A',
               'light-gray-text': '#EAEAEA',
-              'lightning-blue': '#00D4FF',
+              'lightning-blue': '#00D4FF', // Usaremos este para los enlaces
               'winner-gold': '#FFD700',
             }
           }
@@ -43,7 +43,7 @@
                 <div class="bg-gray-800 p-6 rounded-lg text-center">
                     <p class="text-lg text-gray-400">Precio BTC en vivo</p>
                     <p id="btc-price" class="text-3xl font-bold text-bitcoin-orange mt-2">Cargando...</p>
-                    <a href="https://www.coingecko.com/es/monedas/bitcoin" target="_blank" rel="noopener noreferrer" class="text-xs text-gray-500 mt-2 hover:underline">Fuente: CoinGecko</a>
+                    <a href="https://www.coingecko.com/es/monedas/bitcoin" target="_blank" rel="noopener noreferrer" class="text-xs text-lightning-blue underline hover:text-bitcoin-orange mt-2">Fuente: CoinGecko</a>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg text-center">
                     <p class="text-lg text-gray-400">Premio acumulado del sorteo</p>
@@ -53,7 +53,7 @@
                 <div class="bg-gray-800 p-6 rounded-lg text-center">
                     <p class="text-lg text-gray-400">Cierre mes anterior</p>
                     <p id="last-month-price" class="text-3xl font-bold text-gray-300 mt-2">Cargando...</p>
-                    <a id="price-source-link" href="#" target="_blank" rel="noopener noreferrer" class="text-xs text-lightning-blue hover:underline mt-2 inline-block">Ver Fuente Oficial</a>
+                    <a id="price-source-link" href="https://www.coingecko.com/es/monedas/bitcoin/historical_data" target="_blank" rel="noopener noreferrer" class="text-xs text-lightning-blue underline hover:text-bitcoin-orange mt-2 inline-block">Ver Fuente Oficial</a>
                 </div>
             </div>
 
@@ -113,7 +113,7 @@
                     <div class="mb-6 md:mb-0 flex-shrink-0">
                         <p class="font-semibold mb-2 text-lg">1. Paga 10.000 SATS:</p>
                         <div id="payment-qrcode" class="bg-white p-3 rounded-md inline-block mx-auto mt-2">
-                            </div>
+                        </div>
                     </div>
 
                     <div class="text-left flex-grow">
@@ -127,16 +127,18 @@
                             </button>
                         </div>
                         
-                        <p class="font-semibold mb-2 mt-6 text-lg">2. Incluye en el Mensaje del Pago:</p>
+                        <p class="font-semibold mb-2 mt-6 text-lg">2. En el mensaje del pago Lightning, incluye:</p>
                         <div class="bg-dark-gray p-4 rounded-md text-sm">
-                            <p class="font-mono text-lightning-blue break-all">PRECIO_PREDICHO TU_LN_PAYOUT NICK_OPCIONAL</p>
-                            <p class="text-xs text-gray-500 mt-2">Ejemplo: <span class="font-mono">105000.50 miwallet@ln.com MiNick</span></p>
+                            <p class="font-mono text-lightning-blue break-all">TU_LNADDRESS TU_PRECIO</p>
+                            <p class="text-xs text-gray-500 mt-2">Ejemplo: <span class="font-mono">usuario@wallet.com 115300</span></p>
                         </div>
-                        <ul class="text-xs text-gray-500 mt-3 list-disc list-inside pl-2">
-                            <li><strong>PRECIO_PREDICHO:</strong> Tu predicción para BTC/USD (ej: 110250.75).</li>
-                            <li><strong>TU_LN_PAYOUT:</strong> Tu LN Address donde recibir el premio.</li>
-                            <li><strong>NICK_OPCIONAL:</strong> Un apodo si resultas ganador.</li>
+                        <ul class="text-xs text-gray-500 mt-3 list-disc list-inside pl-2 space-y-1">
+                            <li><strong>TU_LNADDRESS:</strong> Tu Lightning Address COMPLETA para recibir el premio.</li>
+                            <li><strong>TU_PRECIO:</strong> Tu predicción del precio de BTC/USD. Escribe solo NÚMEROS ENTEROS (ej: <span class="font-mono">115300</span> para $115,300.00). No uses puntos, comas ni decimales.</li>
                         </ul>
+                        <p class="text-xs text-bitcoin-orange mt-4 font-semibold bg-gray-700 p-2 rounded">
+                            ⚠️ ¡Atención! Si no incluyes tu LN Address y tu predicción de precio en el formato correcto, o si falta alguno de los dos, tu participación no será válida y perderás los 10.000 sats de la entrada. Revisa bien antes de enviar.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -145,9 +147,9 @@
         </main>
     
     <footer class="text-center p-8 mt-12 text-gray-500">
-        <p class="mb-4">⚡ Creado con Lightning por <a href="https://twitter.com/abcbbtc" target="_blank" rel="noopener noreferrer" class="text-bitcoin-orange hover:underline">abcbbtc</a> ⚡</p>
+        <p class="mb-4">⚡ Creado con Lightning por <span class="font-semibold text-light-gray-text">abcbbtc</span> ⚡</p>
         <p class="text-sm">¿Te gusta el proyecto? Apoya mi trabajo:</p>
-        <a href="lightning:satoshi@pay.abcbbtc.com" class="text-sm font-mono mt-1 hover:text-winner-gold">satoshi@pay.abcbbtc.com</a>
+        <a href="lightning:satoshi@pay.abcbbtc.com" class="text-sm font-mono mt-1 text-lightning-blue underline hover:text-bitcoin-orange">satoshi@pay.abcbbtc.com</a>
     </footer>
 
     <script src="js/main.js"></script>
